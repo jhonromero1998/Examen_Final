@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:body>
+        <ui:composition template="./TemplateVeterinaria.xhtml">
+
+            <ui:define name="content">
+                
+                <p:growl id="msj" autoUpdate="true"/>
+                <div align="center">
+
+                    <h:form id="fromMascota">
+                        <p:panel style="width: 80%">
+                            <f:facet name="header">
+                                <p:column>
+                                    <p:outputLabel value="Mascotas"/>
+                                </p:column>
+                            </f:facet>
+                            <p:panelGrid style="width: 80%">
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="ID"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText value="#{mascotaBean.mascota.idMascota}" required="true" style="width: 90%"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Nombre Mascota"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText value="#{mascotaBean.mascota.nombreMascota}" required="true" style="width: 90%"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Nombre Cliente"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText value="#{mascotaBean.mascota.nombreCliente}" required="true" style="width: 90%"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Raza"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText value="#{mascotaBean.mascota.raza}" required="true" style="width: 90%"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                            <p:commandButton value="Guardar" action="#{mascotaBean.insertMascota()}" update=":tableMascotas:listMascotas"/>
+                            <p:commandButton value="Nuevo" action="#{mascotaBean.clean()}" update=":fromMascota"/>
+                            <p:commandButton value="Editar" action="#{mascotaBean.updateMascota()}" update=":tableMascotas:listMascotas"/>
+                        </p:panel>
+                    </h:form>
+                    <h:form id="tableMascotas" style="width: 80%">
+                        <p:dataTable id="listMascotas" var="mascota" value="#{mascotaBean.listMascota()}" rowKey="#{mascota.idMascota}" selection="#{mascotaBean.mascota}" selectionMode="single" >
+                            <p:ajax event="rowSelect" update=":fromMascota"/>
+                            <p:column headerText="Codigo">
+                                <p:outputLabel value="#{mascota.getIdMascota()}"/>
+                            </p:column>
+                            <p:column headerText="Descripcion">
+                                <p:outputLabel value="#{mascota.getNombreMascota()}"/>
+                            </p:column>
+                            <p:column headerText="Dueño">
+                                <p:outputLabel value="#{mascota.getNombreCliente()}"/>
+                            </p:column>
+                            <p:column headerText="Raza">
+                                <p:outputLabel value="#{mascota.getRaza()}"/>
+                            </p:column>
+                            <p:column headerText="Acciones">
+                                <p:commandButton value="Eliminar" oncomplete="PF('dlgEliminar').show();">
+                                    <f:setPropertyActionListener target="#{mascotaBean.mascota}" value="#{mascota}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </div>
+                <p:dialog id="dlgEliminar" header="Eliminar registro" widgetVar="dlgEliminar" showEffect="explode" hideEffect="explode">
+                    <h:form id="fromEliminar">
+                        <h:outputText value="Desea eliminar este registro"/>
+                        <p:commandButton value="Si" actionListener="#{mascotaBean.deleteMascota()}" update=":tableMascotas:listMascotas" oncomplete="PF('dlgEliminar').hide()"/>
+                        <p:commandButton value="No" oncomplete="PF('dlgEliminar').hide()"/>
+                    </h:form>
+                </p:dialog>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>
+
