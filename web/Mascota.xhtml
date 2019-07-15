@@ -54,14 +54,14 @@
                                     </p:column>
                                 </p:row>
                             </p:panelGrid>
-                            <p:commandButton value="Guardar" action="#{mascotaBean.insertMascota()}" update=":tableMascotas:listMascotas"/>
                             <p:commandButton value="Nuevo" action="#{mascotaBean.clean()}" update=":fromMascota"/>
-                            <p:commandButton value="Editar" action="#{mascotaBean.updateMascota()}" update=":tableMascotas:listMascotas"/>
+                            <p:commandButton value="Guardar" action="#{mascotaBean.insertMascota()}" update=":tableMascotas:listMascotas" rendered="#{!mascotaBean.banderaSelect}"/>
+                            <p:commandButton value="Editar" action="#{mascotaBean.updateMascota()}" update=":tableMascotas:listMascotas" rendered="#{mascotaBean.banderaSelect}"/>
                         </p:panel>
                     </h:form>
                     <h:form id="tableMascotas" style="width: 80%">
                         <p:dataTable id="listMascotas" var="mascota" value="#{mascotaBean.listMascota()}" rowKey="#{mascota.idMascota}" selection="#{mascotaBean.mascota}" selectionMode="single" >
-                            <p:ajax event="rowSelect" update=":fromMascota"/>
+                            <p:ajax event="rowSelect" update=":fromMascota" listener="#{mascotaBean.selectBandera()}"/>
                             <p:column headerText="Codigo">
                                 <p:outputLabel value="#{mascota.getIdMascota()}"/>
                             </p:column>

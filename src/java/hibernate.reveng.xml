@@ -40,7 +40,5 @@ made subject to such option by the copyright holder.
 Contributor(s):
 -->
 <hibernate-reverse-engineering>
-  <schema-selection match-catalog="mascota"/>
-  <table-filter match-name="mascota"/>
-  <table-filter match-name="clientes"/>
+  <schema-selection/>
 </hibernate-reverse-engineering>

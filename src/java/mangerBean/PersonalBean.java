@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mangerBean;
 
-import dao.ClientesDao;
-import entidades.Cliente;
+import dao.PersonalDao;
+import entidades.Personal;
 import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -19,73 +14,73 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class ClientesBean {
+public class PersonalBean {
 
-    private Cliente clientes;
-    private ClientesDao clientesDao;
+    private Personal personal;
+    private PersonalDao personalDao;
     private boolean respuesta;
 
-    public ClientesBean() {
-        this.clientes = new Cliente();
+    public PersonalBean() {
+        this.personal = new Personal();
     }
 
-    public Cliente getClientes() {
-        return clientes;
+    public Personal getPersonal() {
+        return personal;
     }
 
-    public void setClientes(Cliente clientes) {
-        this.clientes = clientes;
+    public void setPersonal(Personal personal) {
+        this.personal = personal;
     }
 
-    public ArrayList<Cliente> listClientes() {
+    public ArrayList<Personal> listPersonal() {
 
-        ArrayList<Cliente> list = new ArrayList<>();
-        clientesDao = new ClientesDao();
-        list = clientesDao.listClientes();
+        ArrayList<Personal> list = new ArrayList<>();
+        personalDao = new PersonalDao();
+        list = personalDao.listPersonal();
         return list;
 
     }
 
-    public String insertClientes() {
+    public String insertPersonal() {
 
-        clientesDao = new ClientesDao();
-        respuesta = clientesDao.insertClientes(clientes);
+        personalDao = new PersonalDao();
+        respuesta = personalDao.insertPersonal(personal);
         if (respuesta) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro insertado con exito", "exito"));
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "No se pudo registrar"));
         }
-        return "/Clientes";
+        return "/Personal";
 
     }
 
     public String clean() {
-        return "/Clientes";
+        return "/Personal";
     }
 
-    public String updateClientes() {
+    public String updatePersonal() {
 
-        clientesDao = new ClientesDao();
-        respuesta = clientesDao.updateClientes(clientes);
+        personalDao = new PersonalDao();
+        respuesta = personalDao.updatePersonal(personal);
         if (respuesta) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro actualizado con exito", "exito"));
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "No se pudo registrar"));
         }
-        return "/Clientes";
+        return "/Personal";
 
     }
 
-    public String deleteClientes(Cliente clientes) {
+    public String deletePersonal(Personal personal) {
 
-        clientesDao = new ClientesDao();
-        respuesta = clientesDao.deleteClientes(clientes);
+        personalDao = new PersonalDao();
+        respuesta = personalDao.deletePersonal(personal);
         if (respuesta) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro eliminado con exito", "exito"));
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "No se pudo registrar"));
         }
-        return "/Clientes";
+        return "/Personal";
 
     }
 

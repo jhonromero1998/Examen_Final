@@ -1,20 +1,20 @@
 package service;
 
-import entidades.Clientes;
+import entidades.Cliente;
 import java.util.ArrayList;
 
 /**
  *
- * @author IVAN
+ * @author PC-JHONROMERO
  */
 public interface IClientes {
     
-    public abstract ArrayList<Clientes> listClientes ();
+    public abstract ArrayList<Cliente> listClientes ();
     
-    public abstract boolean insertClientes (Clientes objClientes);
+    public abstract boolean insertClientes (Cliente objClientes);
     
-    public abstract boolean updateClientes (Clientes objClientes);
+    public abstract boolean updateClientes (Cliente objClientes);
     
-    public abstract boolean deleteClientes (Clientes objClientes);
+    public abstract boolean deleteClientes (Cliente objClientes);
     
 }

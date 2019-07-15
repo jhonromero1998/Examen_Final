@@ -2,22 +2,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
     <h:body>
         <ui:composition template="./TemplateVeterinaria.xhtml">
-
             <ui:define name="content">
-
                 <p:growl id="msj" autoUpdate="true"/>
                 <div align="center">
 
-                    <h:form id="formClientes">
+                    <h:form id="formpersonal">
                         <p:panel style="width: 80%">
                             <f:facet name="header">
                                 <p:column>
-                                    <p:outputLabel value="Clientes"/>
+                                    <p:outputLabel value="Personal"/>
                                 </p:column>
                             </f:facet>
                             <p:panelGrid style="width: 80%">
@@ -26,7 +27,7 @@
                                         <p:outputLabel value="ID"/>
                                     </p:column>
                                     <p:column>
-                                        <p:inputText value="#{clientesBean.clientes.idcliente}" required="true" style="width: 90%"/>
+                                        <p:inputText value="#{personalBean.personal.idPersonal}" required="true" style="width: 90%"/>
                                     </p:column>
                                 </p:row>
                                 <p:row>
@@ -34,7 +35,7 @@
                                         <p:outputLabel value="Nombres"/>
                                     </p:column>
                                     <p:column>
-                                        <p:inputText value="#{clientesBean.clientes.nombre}" required="true" style="width: 90%"/>
+                                        <p:inputText value="#{personalBean.personal.nombre}" required="true" style="width: 90%"/>
                                     </p:column>
                                 </p:row>
                                 <p:row>
@@ -42,77 +43,76 @@
                                         <p:outputLabel value="Apellidos"/>
                                     </p:column>
                                     <p:column>
-                                        <p:inputText value="#{clientesBean.clientes.apellidos}" required="true" style="width: 90%"/>
+                                        <p:inputText value="#{personalBean.personal.apellidos}" required="true" style="width: 90%"/>
                                     </p:column>
                                 </p:row>
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel value="Fecha de Nacimiento"/>
+                                        <p:outputLabel value="DNI"/>
                                     </p:column>
                                     <p:column>
-                                        <p:calendar id="button" value="#{clientesBean.clientes.fechanacimiento}" showOn="button" style="width: 100%"/>
+                                        <p:inputText value="#{personalBean.personal.dni}" required="true" style="width: 90%"/>
                                     </p:column>
                                 </p:row>
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel value="Dirección"/>
+                                        <p:outputLabel value="Telfono / Celular"/>
                                     </p:column>
                                     <p:column>
-                                        <p:inputText value="#{clientesBean.clientes.direccion}" required="true" style="width: 90%"/>
+                                        <p:inputText value="#{personalBean.personal.telefono}" required="true" style="width: 90%"/>
                                     </p:column>
                                 </p:row>
-                                <p:row>
-                                    <p:column>
-                                        <p:outputLabel value="Telefono"/>
-                                    </p:column>
-                                    <p:column>
-                                        <p:inputText value="#{clientesBean.clientes.telefono}" required="true" style="width: 90%"/>
-                                    </p:column>
-                                </p:row>
-                                <p:row>
+                                 <p:row>
                                     <p:column>
                                         <p:outputLabel value="Email"/>
                                     </p:column>
                                     <p:column>
-                                        <p:inputText value="#{clientesBean.clientes.email}" required="true" style="width: 90%"/>
+                                        <p:inputText value="#{personalBean.personal.email}" required="true" style="width: 90%"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Cargo"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText  value="#{personalBean.personal.cargo}" style="width: 90%"/>
                                     </p:column>
                                 </p:row>
                             </p:panelGrid>
-                            <p:commandButton value="Guardar" action="#{clientesBean.insertClientes()}" update=":tableClientes:listClientes, :formClientes"/>
-                            <p:commandButton value="Nuevo" action="#{clientesBean.clean()}" update=":formClientes"/>
-                            <p:commandButton value="Actualizar" action="#{clientesBean.updateClientes()}" update=":tableClientes:listClientes"/>
+                            <p:commandButton value="Guardar" action="#{personalBean.insertPersonal()}" update=":tablePersonal:listPersonal, :formpersonal"/>
+                            <p:commandButton value="Nuevo" action="#{personalBean.clean()}" update=":formpersonal"/>
+                            <p:commandButton value="Actualizar" action="#{personalBean.updatePersonal()}" update=":tablePersonal:listPersonal"/>
                         </p:panel>
                     </h:form>
-                    <h:form id="tableClientes" style="width: 80%">
-                        <p:dataTable id="listClientes" var="clientes" value="#{clientesBean.listClientes()}" rowKey="#{clientes.idcliente}" selection="#{clientesBean.clientes}" selectionMode="single" >
-                            <p:ajax event="rowSelect" update=":formClientes"/>
+                    <h:form id="tablePersonal" style="width: 80%">
+                        <p:dataTable id="listPersonal" var="personal" value="#{personalBean.listPersonal()}" rowKey="#{personal.idPersonal}" selection="#{personalBean.personal}" selectionMode="single" >
+                            <p:ajax event="rowSelect" update=":formpersonal"/>
                             <p:column headerText="Codigo">
-                                <p:outputLabel value="#{clientes.getIdcliente()}"/>
+                                <p:outputLabel value="#{personal.getIdPersonal()}"/>
                             </p:column>
                             <p:column headerText="Nombres y Apellidos">
-                                <p:outputLabel value="#{clientes.getNombre()} #{mascota.getNombreCliente()}"/>
+                                <p:outputLabel value="#{personal.getNombre()}"/>
                             </p:column>
-                            <p:column headerText="Fecha de Nacimiento">
-                                <p:outputLabel value="#{clientes.getFechanacimiento()}"/>
-                            </p:column>
-                            <p:column headerText="Direccion">
-                                <p:outputLabel value="#{clientes.getDireccion()}"/>
+                            <p:column headerText="Dni">
+                                <p:outputLabel value="#{personal.getDni()}"/>
                             </p:column>
                             <p:column headerText="Telefono">
-                                <p:outputLabel value="#{clientes.getTelefono()}"/>
+                                <p:outputLabel value="#{personal.getTelefono()}"/>
                             </p:column>
                             <p:column headerText="Email">
-                                <p:outputLabel value="#{clientes.getEmail()}"/>
+                                <p:outputLabel value="#{personal.getEmail()}"/>
+                            </p:column>
+                            <p:column headerText="Cargo">
+                                <p:outputLabel value="#{personal.getCargo()}"/>
                             </p:column>
                             <p:column headerText="Acciones">
-                                <p:commandButton value="Eliminar" action="#{clientesBean.deleteClientes(clientes)}" update=":tableClientes:listClientes"/>
+                                <p:commandButton value="Eliminar" action="#{personalBean.deletePersonal(personal)}" update=":tablePersonal:listPersonal"/>
                             </p:column>
                         </p:dataTable>
                     </h:form>
                 </div>
 
             </ui:define>
-
         </ui:composition>
     </h:body>
 </html>
