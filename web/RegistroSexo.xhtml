@@ -26,7 +26,7 @@
                                         <p:outputLabel value="ID"/>
                                     </p:column>
                                     <p:column>
-                                        <p:inputText value="#{sexoBeans.sexo.idsexo}"/>
+                                        <p:inputText value="#{sexoBean.sexo.idsexo}"/>
                                     </p:column>
                                 </p:row>
 
@@ -35,10 +35,10 @@
                                         <p:outputLabel value="Descripcion"/>
                                     </p:column>
                                     <p:column>
-                                        <p:selectOneMenu value="#{sexoBeans.sexo.descripcion}">
+                                        <p:selectOneMenu value="#{sexoBean.sexo.descripcion}">
                                             <f:selectItem itemLabel="--Seleccione--"/>
-                                            <f:selectItem itemLabel="Macho" itemValue="F"/>
-                                            <f:selectItem itemLabel="Embra" itemValue="M"/>
+                                            <f:selectItem itemLabel="Embra" itemValue="Embra"/>
+                                            <f:selectItem itemLabel="Macho" itemValue="Macho"/>
                                         </p:selectOneMenu>
                                     </p:column>
                                 </p:row>
@@ -47,10 +47,10 @@
                                         <p:outputLabel value="Estado"/>
                                     </p:column>
                                     <p:column>
-                                        <p:selectOneMenu value="#{sexoBeans.sexo.estado}">
+                                        <p:selectOneMenu value="#{sexoBean.sexo.estado}">
                                             <f:selectItem itemLabel="--Seleccione un Mascota--"/>
-                                            <f:selectItem itemLabel="Activo" itemValue="A"/>
-                                            <f:selectItem itemLabel="Inactivo" itemValue="I"/>
+                                            <f:selectItem itemLabel="Activo" itemValue="Activo"/>
+                                            <f:selectItem itemLabel="Inactivo" itemValue="Inactivo"/>
                                         </p:selectOneMenu>
                                     </p:column>
                                 </p:row>
@@ -65,6 +65,7 @@
                     <h:form id="formData">
                         <p:dataTable rowKey="#{sexo.idsexo}" selection="#{sexoBean.sexo}" selectionMode="single" id="dataTableSexo" var="sexo" value="#{sexoBean.listarSexo()}" style="width: 40%">
                             <p:ajax event="rowSelect" update=":formSexo" listener="#{sexoBean.banderaSelected()}"/>
+                            
                             <p:column headerText="Código">
                                 <p:outputLabel value="#{sexo.idsexo}"/>
                             </p:column>
@@ -74,16 +75,22 @@
                             <p:column headerText="Estado">
                                 <p:outputLabel value="#{sexo.estado}"/>
                             </p:column>
-
-                            <p:column>
-                                <p:commandButton value="Eliminar" action="#{sexoBean.eliminarSexo()}" update=":formData:dataTableSexo,:formSexo"/>
+                            <p:column headerText="Acciones">
                                 <p:commandButton value="Eliminar" oncomplete="PF('dlgEliminar').show();">
                                     <f:setPropertyActionListener target="#{sexoBean.sexo}" value="#{sexo}"/>
                                 </p:commandButton>
                             </p:column>
+                            
                         </p:dataTable>
                     </h:form>
                 </div>
+                 <p:dialog id="dlgEliminar" header="Eliminar registro" widgetVar="dlgEliminar" showEffect="explode" hideEffect="explode">
+                    <h:form id="fromEliminar">
+                        <h:outputText value="Desea eliminar este registro"/>
+                        <p:commandButton value="Si" actionListener="#{sexoBean.eliminarSexo()}" update=":formData:dataTableSexo,:formSexo" oncomplete="PF('dlgEliminar').hide()"/>
+                        <p:commandButton value="No" oncomplete="PF('dlgEliminar').hide()"/>
+                    </h:form>
+                </p:dialog>
 
             </ui:define>
 

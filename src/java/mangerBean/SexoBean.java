@@ -38,7 +38,7 @@ public class SexoBean implements Serializable{
         } catch (HibernateException e) {
             System.out.println("Error al insertar "+e.getMessage());
         }
-        return "/ISexo";
+        return "/RegistroSexo";
     }
     
     public String actualizarSexo(){
@@ -53,7 +53,7 @@ public class SexoBean implements Serializable{
         } catch (HibernateException e) {
             System.out.println("Error al actualizar: "+e.getMessage());
         }
-        return "/ISexo";
+        return "/RegistroSexo";
     }
     
     public ArrayList<Sexo> listarSexo(){
@@ -75,11 +75,12 @@ public class SexoBean implements Serializable{
         } catch (HibernateException e) {
             System.out.println("Error al eliminar: "+e.getMessage());
         }
-        return "/ISexo";
+        return "/RegistroSexo";
     }
     
     public String limpiar(){
-        return "/ISexo";
+        banderaSelected = false;
+        return "/RegistroSexo";
     }
     
     public void selectedBandera(){
@@ -101,4 +102,5 @@ public class SexoBean implements Serializable{
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
+    
 }
