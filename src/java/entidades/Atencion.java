@@ -1,5 +1,5 @@
 package entidades;
-// Generated 12-jul-2019 10:45:07 by Hibernate Tools 4.3.1
+// Generated 18-jul-2019 4:13:52 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,19 +13,21 @@ public class Atencion  implements java.io.Serializable {
      private int idAtencion;
      private Mascotaporcliente mascotaporcliente;
      private Personal personal;
-     private String fechaAtencion;
-     private String date;
+     private Tipoatencion tipoatencion;
+     private Date fechaAtencion;
+     private String diagnostico;
      private Date horaAtencion;
 
     public Atencion() {
     }
 
-    public Atencion(int idAtencion, Mascotaporcliente mascotaporcliente, Personal personal, String fechaAtencion, String date, Date horaAtencion) {
+    public Atencion(int idAtencion, Mascotaporcliente mascotaporcliente, Personal personal, Tipoatencion tipoatencion, Date fechaAtencion, String diagnostico, Date horaAtencion) {
        this.idAtencion = idAtencion;
        this.mascotaporcliente = mascotaporcliente;
        this.personal = personal;
+       this.tipoatencion = tipoatencion;
        this.fechaAtencion = fechaAtencion;
-       this.date = date;
+       this.diagnostico = diagnostico;
        this.horaAtencion = horaAtencion;
     }
    
@@ -50,19 +52,26 @@ public class Atencion  implements java.io.Serializable {
     public void setPersonal(Personal personal) {
         this.personal = personal;
     }
-    public String getFechaAtencion() {
+    public Tipoatencion getTipoatencion() {
+        return this.tipoatencion;
+    }
+    
+    public void setTipoatencion(Tipoatencion tipoatencion) {
+        this.tipoatencion = tipoatencion;
+    }
+    public Date getFechaAtencion() {
         return this.fechaAtencion;
     }
     
-    public void setFechaAtencion(String fechaAtencion) {
+    public void setFechaAtencion(Date fechaAtencion) {
         this.fechaAtencion = fechaAtencion;
     }
-    public String getDate() {
-        return this.date;
+    public String getDiagnostico() {
+        return this.diagnostico;
     }
     
-    public void setDate(String date) {
-        this.date = date;
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
     }
     public Date getHoraAtencion() {
         return this.horaAtencion;

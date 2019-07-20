@@ -1,5 +1,5 @@
 package entidades;
-// Generated 14/07/2019 07:08:16 PM by Hibernate Tools 4.3.1
+// Generated 18-jul-2019 4:13:52 by Hibernate Tools 4.3.1
 
 
 
@@ -10,14 +10,22 @@ public class Sexo  implements java.io.Serializable {
 
 
      private int idsexo;
-     private char descripcion;
-     private char estado;
+     private Mascota mascota;
+     private String descripcion;
+     private String estado;
 
     public Sexo() {
     }
 
-    public Sexo(int idsexo, char descripcion, char estado) {
+	
+    public Sexo(int idsexo, String descripcion, String estado) {
+        this.idsexo = idsexo;
+        this.descripcion = descripcion;
+        this.estado = estado;
+    }
+    public Sexo(int idsexo, Mascota mascota, String descripcion, String estado) {
        this.idsexo = idsexo;
+       this.mascota = mascota;
        this.descripcion = descripcion;
        this.estado = estado;
     }
@@ -29,18 +37,25 @@ public class Sexo  implements java.io.Serializable {
     public void setIdsexo(int idsexo) {
         this.idsexo = idsexo;
     }
-    public char getDescripcion() {
+    public Mascota getMascota() {
+        return this.mascota;
+    }
+    
+    public void setMascota(Mascota mascota) {
+        this.mascota = mascota;
+    }
+    public String getDescripcion() {
         return this.descripcion;
     }
     
-    public void setDescripcion(char descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public char getEstado() {
+    public String getEstado() {
         return this.estado;
     }
     
-    public void setEstado(char estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

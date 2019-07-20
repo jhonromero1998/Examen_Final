@@ -1,5 +1,5 @@
 package entidades;
-// Generated 12-jul-2019 10:45:07 by Hibernate Tools 4.3.1
+// Generated 18-jul-2019 4:13:52 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -19,6 +19,7 @@ public class Personal  implements java.io.Serializable {
      private String direccion;
      private String cargo;
      private String email;
+     private Set usuarios = new HashSet(0);
      private Set atencions = new HashSet(0);
 
     public Personal() {
@@ -35,7 +36,7 @@ public class Personal  implements java.io.Serializable {
         this.cargo = cargo;
         this.email = email;
     }
-    public Personal(int idPersonal, String nombre, String apellidos, String dni, String telefono, String direccion, String cargo, String email, Set atencions) {
+    public Personal(int idPersonal, String nombre, String apellidos, String dni, String telefono, String direccion, String cargo, String email, Set usuarios, Set atencions) {
        this.idPersonal = idPersonal;
        this.nombre = nombre;
        this.apellidos = apellidos;
@@ -44,6 +45,7 @@ public class Personal  implements java.io.Serializable {
        this.direccion = direccion;
        this.cargo = cargo;
        this.email = email;
+       this.usuarios = usuarios;
        this.atencions = atencions;
     }
    
@@ -102,6 +104,13 @@ public class Personal  implements java.io.Serializable {
     
     public void setEmail(String email) {
         this.email = email;
+    }
+    public Set getUsuarios() {
+        return this.usuarios;
+    }
+    
+    public void setUsuarios(Set usuarios) {
+        this.usuarios = usuarios;
     }
     public Set getAtencions() {
         return this.atencions;

@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./TemplateVeterinaria.xhtml">
+            <ui:define name="content">
+                <p:growl id="msj" autoUpdate="true"/>
+                <div align="center">
+
+                    <h:form id="formReservaCita">
+                        <p:panel style="width: 80%">
+                            <f:facet name="header">
+                                <p:column>
+                                    <p:outputLabel value="Reserva Cita"/>
+                                </p:column>
+                            </f:facet>
+                            <p:panelGrid style="width: 80%">
+                               <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="ID"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText value="#{reservaCitaBean.reservaCita.idReservaCita}" required="true" style="width: 90%"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Fecha de Nacimiento"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:calendar id="button" value="#{reservaCitaBean.reservaCita.fecha}" showOn="button" style="width: 100%"/>
+                                    </p:column>
+                                </p:row>
+                             <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Cliente "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu value="#{reservaCitaBean.idCliente}">
+                                            <f:selectItem itemLabel="Seleccione Item..."/>
+                                            <f:selectItems value="#{reservaCitaBean.listaCliente}" var="cliente" itemValue="#{cliente.idcliente}" itemLabel="#{cliente.nombre} #{cliente.apellidos}"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="TipoReserva"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu value="#{reservaCitaBean.idPersonal}">
+                                            <f:selectItem itemLabel="Seleccione Item..."/>
+                                            
+                                            <f:selectItems value="#{reservaCitaBean.listaPersonal}" var="reserva" itemValue="#{reserva.nombre}" itemLabel="#{reserva.nombre}"/>                                      
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Usuario "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu value="#{reservaCitaBean.idCliente}">
+                                            <f:selectItem itemLabel="Seleccione Item..."/>
+                                            <f:selectItems value="#{reservaCitaBean.listaCliente}" var="usuario" itemValue="#{usuario.idcliente}" itemLabel="#{usuario.nombre} #{usuario.apellidos}"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                
+                            </p:panelGrid>
+                            <p:commandButton value="Guardar" action="#{reservaCitaBean.insertReservaCita()}" update=":tableReservacita:listReservacita, :formReservaCita"/>
+                            <p:commandButton value="Nuevo" action="#{reservaCitaBean.clean()}" update=":formReservaCita"/>
+                            <p:commandButton value="Actualizar" action="#{reservaCitaBean.updateReservaCita()}" update=":tableReservacita:listReservacita"/>
+                        </p:panel>
+                    </h:form>
+                    <h:form id="tableReservacita" style="width: 80%">
+                        <p:dataTable id="listReservacita" var="ReservaCita" value="#{reservaCitaBean.listReservaCita()}" rowKey="#{ReservaCita.idReservaCita}" selection="#{reservaCitaBean.reservaCita}" selectionMode="single" >
+                            <p:ajax event="rowSelect" update=":formReservaCita"/>
+                            <p:column headerText="ID">
+                                <p:outputLabel value="#{ReservaCita.idReservaCita}"/>
+                            </p:column>
+                            <p:column headerText="fecha">
+                                <p:outputLabel value="#{ReservaCita.fecha}"/>
+                            </p:column>
+                     
+                            <p:column headerText="Acciones">
+                                <p:commandButton value="Eliminar" action="#{reservaCitaBean.deleteReservaCita()}" update=":tableReservacita:listReservacita"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </div>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

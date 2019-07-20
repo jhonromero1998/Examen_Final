@@ -1,5 +1,5 @@
 package entidades;
-// Generated 12-jul-2019 10:45:07 by Hibernate Tools 4.3.1
+// Generated 18-jul-2019 4:13:52 by Hibernate Tools 4.3.1
 
 
 
@@ -53,6 +53,14 @@ public class MascotaporclienteId  implements java.io.Serializable {
          result = 37 * result + this.getClienteIdcliente();
          return result;
    }   
+
+    public void setIdMascota(int IdMascota) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setiIdCliente(int idCliente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 
 }

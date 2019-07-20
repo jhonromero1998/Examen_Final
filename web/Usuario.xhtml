@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./TemplateVeterinaria.xhtml">
+            <ui:define name="content">
+                <p:growl id="msj" autoUpdate="true"/>
+                <div align="center">
+
+                    <h:form id="formusuario">
+                        <p:panel style="width: 80%">
+                            <f:facet name="header">
+                                <p:column>
+                                    <p:outputLabel value="Usuario"/>
+                                </p:column>
+                            </f:facet>
+                            <p:panelGrid style="width: 80%">
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Id"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText value="#{usuarioBean.usuario.idUsuario}" required="true" style="width: 90%"/>
+                                    </p:column>
+                                </p:row>
+                             <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Cliente"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu value="#{usuarioBean.idCliente}">
+                                            <f:selectItem itemLabel="Seleccione Item..."/>
+                                            <f:selectItems value="#{usuarioBean.listaCliente}" var="cliente" itemValue="#{cliente.idcliente}" itemLabel="#{cliente.nombre} #{cliente.apellidos}"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Personal "/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu value="#{usuarioBean.idPersonal}">
+                                            <f:selectItem itemLabel="Seleccione Item..."/>
+                                            <f:selectItems value="#{usuarioBean.listaPersonal}" var="personal" itemValue="#{personal.idPersonal}" itemLabel="#{personal.nombre} #{personal.apellidos}"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                 <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Nombres"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText value="#{usuarioBean.usuario.nombreUsuario}" required="true" style="width: 90%"/>
+                                    </p:column>
+                                </p:row>
+                                 <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Contraseña"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText value="#{usuarioBean.usuario.password}" required="true" style="width: 90%"/>
+                                    </p:column>
+                                </p:row>
+                                 
+                            </p:panelGrid>
+                            <p:commandButton value="Guardar" action="#{usuarioBean.insertUsuario()}" update=":tableUsuario:listUsuario, :formusuario"/>
+                            <p:commandButton value="Nuevo" action="#{usuarioBean.clean()}" update=":formusuario"/>
+                            <p:commandButton value="Actualizar" action="#{usuarioBean.updateUsuario()}" update=":tableUsuario:listUsuario"/>
+                        </p:panel>
+                    </h:form>
+                    <h:form id="tableUsuario" style="width: 80%">
+                        <p:dataTable id="listUsuario" var="usuario" value="#{usuarioBean.listUsuario()}" rowKey="#{usuario.idUsuario}" selection="#{usuarioBean.usuario}" selectionMode="single" >
+                            <p:ajax event="rowSelect" update=":formusuario"/>
+                            <p:column headerText="ID">
+                                <p:outputLabel value="#{usuario.idUsuario}"/>
+                            </p:column>
+                            <p:column headerText="Nombre">
+                                <p:outputLabel value="#{usuario.nombreUsuario}"/>
+                            </p:column>
+                            <p:column headerText="Password">
+                                <p:outputLabel value="#{usuario.password}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Acciones">
+                                <p:commandButton value="Eliminar" action="#{usuarioBean.deleteUsuario()}" update=":tableUsuario:listUsuario"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </div>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
